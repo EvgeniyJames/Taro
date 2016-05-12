@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.yevgeniyzamkovenko.taro.MainScreenFragment">
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_card_type_three_cards"
+        android:id="@+id/btn_card_type_three_cards"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="189dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_card_type_celt"
+        android:id="@+id/btn_card_type_celt"
+        android:layout_below="@+id/btn_card_type_three_cards"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_card_type_being_wheel"
+        android:id="@+id/btn_card_type_being_wheel"
+        android:layout_below="@+id/btn_card_type_celt"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

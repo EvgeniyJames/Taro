@@ -1,13 +1,10 @@
-package com.yevgeniyzamkovenko.taro;
+package com.yevgeniyzamkovenko.taro.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+
+import com.yevgeniyzamkovenko.taro.R;
 
 public class MainActivity extends FragmentActivity {
 
@@ -27,7 +24,8 @@ public class MainActivity extends FragmentActivity {
 
     private void Start() {
         // Create a new Fragment to be placed in the activity layout
-        Fragment firstFragment = new MainScreenFragment();
+//        Fragment firstFragment = new MainScreenFragment();
+        Fragment firstFragment = new LoginFragment();
 
         // In case this activity was started with special instructions from an
         // Intent, pass the Intent's extras to the fragment as arguments

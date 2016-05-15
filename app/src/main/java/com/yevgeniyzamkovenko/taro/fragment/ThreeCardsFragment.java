@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.yevgeniyzamkovenko.taro.R;
+import com.yevgeniyzamkovenko.taro.utils.MiscUtils;
 
 
 /**
@@ -22,7 +25,26 @@ public class ThreeCardsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_three_cards, container, false);
+
+        ConfigImages(view);
+
         return view;
+    }
+
+    private void ConfigImages(View view) {
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.innercontainer);
+        int size = linearLayout.getChildCount();
+        for (int i = 0; i < size; i++) {
+            View childAt = linearLayout.getChildAt(i);
+            if (childAt instanceof ImageView) {
+                childAt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MiscUtils.DEBUG(v.hashCode() + " ");
+                    }
+                });
+            }
+        }
     }
 
 }

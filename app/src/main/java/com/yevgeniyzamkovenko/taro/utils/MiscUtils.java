@@ -8,10 +8,14 @@ import android.util.Log;
  */
 public class MiscUtils {
 
-    private static final String PREFIX = "TARO";
+    private static final String NAME = "TARO";
+    private static final String PREFIX = NAME + " ### : ";
 
-    public static void TRACE(String tag, String log) {
-        Log.i(PREFIX + " ### : " + tag, log);
+    public static void DEBUG(String tag, String log) {
+        Log.i(PREFIX + tag, log);
     }
 
+    public static void DEBUG(String log) {
+        Log.i(PREFIX, log);
     }
+}

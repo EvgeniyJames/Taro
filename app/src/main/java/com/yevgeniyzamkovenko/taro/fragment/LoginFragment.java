@@ -15,9 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.yevgeniyzamkovenko.taro.Profile;
 import com.yevgeniyzamkovenko.taro.R;
-import com.yevgeniyzamkovenko.taro.listener.OnTokenChangeListener;
 import com.yevgeniyzamkovenko.taro.manager.ProfileManager;
 import com.yevgeniyzamkovenko.taro.task.GetTokenTask;
 import com.yevgeniyzamkovenko.taro.utils.IDefines;
@@ -77,14 +75,14 @@ public class LoginFragment extends Fragment{
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageFinished(view, url);
 
-                    MiscUtils.TRACE(getClass().getSimpleName(), "Page started");
-                    MiscUtils.TRACE(getClass().getSimpleName(), "URL: " + url);
+                    MiscUtils.DEBUG(getClass().getSimpleName(), "Page started");
+                    MiscUtils.DEBUG(getClass().getSimpleName(), "URL: " + url);
 
                     if(url.contains("?code=") && !m_isAuthComplete) {
 
                         Uri uri = Uri.parse(url);
                         m_authCode = uri.getQueryParameter("code");
-                        MiscUtils.TRACE(getClass().getSimpleName(), "Code: " + m_authCode);
+                        MiscUtils.DEBUG(getClass().getSimpleName(), "Code: " + m_authCode);
 
                         m_isAuthComplete = true;
 
@@ -94,7 +92,7 @@ public class LoginFragment extends Fragment{
 
                         context.setResult(Activity.RESULT_OK, m_resultIntent);
 
-                        MiscUtils.TRACE(getClass().getSimpleName(), "dismiss auth dialog");
+                        MiscUtils.DEBUG(getClass().getSimpleName(), "dismiss auth dialog");
 
 //                        Toast.makeText(context, getString(R.string.txtLoggedIn), Toast.LENGTH_SHORT).show();
 

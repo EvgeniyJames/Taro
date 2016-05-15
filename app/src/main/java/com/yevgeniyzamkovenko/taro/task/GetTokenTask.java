@@ -28,7 +28,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... code) {
 
-        MiscUtils.TRACE(getClass().getSimpleName(), "GetToken Request");
+        MiscUtils.DEBUG(getClass().getSimpleName(), "GetToken Request");
         GetTokenInstance();
 
         return null;
@@ -41,21 +41,21 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
         params.put("client_id", IDefines.CLIENT_ID);
         params.put("client_secret", IDefines.CLIENT_SECRET);
 
-        MiscUtils.TRACE(getClass().getSimpleName(), "Params: " + params);
+        MiscUtils.DEBUG(getClass().getSimpleName(), "Params: " + params);
 
         String result = PerformPostCall(IDefines.URL_GET_TOKEN, params);
 
-        MiscUtils.TRACE(getClass().getSimpleName(), "result: " + result);
+        MiscUtils.DEBUG(getClass().getSimpleName(), "result: " + result);
         ProfileManager.GetInstance().SetToken(result);
 
-        MiscUtils.TRACE(getClass().getSimpleName(), "HttpPost execute");
+        MiscUtils.DEBUG(getClass().getSimpleName(), "HttpPost execute");
 
     }
 
     public String PerformPostCall(String requestURL,
                                   HashMap<String, String> postDataParams) {
 
-        MiscUtils.TRACE(getClass().getSimpleName(), "URL: " + requestURL);
+        MiscUtils.DEBUG(getClass().getSimpleName(), "URL: " + requestURL);
 
         URL url;
         String response = "";
@@ -75,7 +75,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
 
             String postDataString = getPostDataString(postDataParams);
 
-            MiscUtils.TRACE(getClass().getSimpleName(), "postDataString: " + postDataString);
+            MiscUtils.DEBUG(getClass().getSimpleName(), "postDataString: " + postDataString);
 
             writer.write(postDataString.getBytes(charset));
 
@@ -83,7 +83,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
             writer.close();
             int responseCode = conn.getResponseCode();
 
-            MiscUtils.TRACE(getClass().getSimpleName(), "responseCode: " + responseCode);
+            MiscUtils.DEBUG(getClass().getSimpleName(), "responseCode: " + responseCode);
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {
                 String line;

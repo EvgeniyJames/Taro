@@ -2,7 +2,7 @@ package com.yevgeniyzamkovenko.taro.task;
 
 import android.os.AsyncTask;
 
-import com.yevgeniyzamkovenko.taro.manager.TokenManager;
+import com.yevgeniyzamkovenko.taro.manager.ProfileManager;
 import com.yevgeniyzamkovenko.taro.utils.IDefines;
 import com.yevgeniyzamkovenko.taro.utils.MiscUtils;
 
@@ -37,7 +37,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
     public void GetTokenInstance() {
         HashMap<String, String> params = new HashMap<>();
 
-        params.put("code", JSONObject.quote(TokenManager.GetInstance().GetCode()));
+        params.put("code", JSONObject.quote(ProfileManager.GetInstance().GetCode()));
         params.put("client_id", IDefines.CLIENT_ID);
         params.put("client_secret", IDefines.CLIENT_SECRET);
 
@@ -46,6 +46,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
         String result = PerformPostCall(IDefines.URL_GET_TOKEN, params);
 
         MiscUtils.TRACE(getClass().getSimpleName(), "result: " + result);
+        ProfileManager.GetInstance().SetToken(result);
 
         MiscUtils.TRACE(getClass().getSimpleName(), "HttpPost execute");
 

@@ -8,7 +8,7 @@ import android.util.Log;
  */
 public class MiscUtils {
 
-    private static final String PREFIX = "RECIPES";
+    private static final String PREFIX = "TARO";
 
     public static void TRACE(String tag, String log) {
         Log.i(PREFIX + " ### : " + tag, log);

@@ -3,11 +3,8 @@ package com.yevgeniyzamkovenko.taro.fragment;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,24 +15,32 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.yevgeniyzamkovenko.taro.Profile;
 import com.yevgeniyzamkovenko.taro.R;
-import com.yevgeniyzamkovenko.taro.manager.TokenManager;
+import com.yevgeniyzamkovenko.taro.listener.OnTokenChangeListener;
+import com.yevgeniyzamkovenko.taro.manager.ProfileManager;
 import com.yevgeniyzamkovenko.taro.task.GetTokenTask;
 import com.yevgeniyzamkovenko.taro.utils.IDefines;
 import com.yevgeniyzamkovenko.taro.utils.MiscUtils;
 import com.yevgeniyzamkovenko.taro.utils.NetworkUtil;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment{
 
     private Button m_buttonLogin;
+    private Button m_fakeButtonLogin;
+
     private WebView m_webView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        m_fakeButtonLogin = (Button) view.findViewById(R.id.btn_fake_login);
+        m_fakeButtonLogin.setOnClickListener(new FakeLoginButtonListener());
 
         m_buttonLogin = (Button) view.findViewById(R.id.btn_login);
         m_buttonLogin.setOnClickListener(new LoginButtonListener());
@@ -45,21 +50,21 @@ public class LoginFragment extends Fragment {
 
     class LoginButtonListener implements View.OnClickListener {
 
-        Dialog authDialog;
+        private Dialog m_authDialog;
 
         @Override
         public void onClick(View v) {
 
             final Activity context = getActivity();
             if (!NetworkUtil.IsNetworkConnected(context)) {
-//                Toast.makeText(getContext(), getString(R.string.txtNoInternetConnection), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.txt_no_internet, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            authDialog = new Dialog(context);
-            authDialog.setContentView(R.layout.auth_dialog);
+            m_authDialog = new Dialog(context);
+            m_authDialog.setContentView(R.layout.auth_dialog);
 
-            m_webView = (WebView) authDialog.findViewById(R.id.webview);
+            m_webView = (WebView) m_authDialog.findViewById(R.id.webview);
             m_webView.getSettings().setJavaScriptEnabled(IDefines.JAVASCRIPT_ENABLE);
             m_webView.loadUrl(IDefines.URL_LOGIN + "?redirectUrl=" + IDefines.URL_REDIRECT);
             m_webView.setWebViewClient(new WebViewClient(){
@@ -83,7 +88,7 @@ public class LoginFragment extends Fragment {
 
                         m_isAuthComplete = true;
 
-                        TokenManager.GetInstance().SetCode(m_authCode);
+                        ProfileManager.GetInstance().SetCode(m_authCode);
 
                         new GetTokenTask().execute();
 
@@ -93,14 +98,23 @@ public class LoginFragment extends Fragment {
 
 //                        Toast.makeText(context, getString(R.string.txtLoggedIn), Toast.LENGTH_SHORT).show();
 
-                        authDialog.dismiss();
+                        m_authDialog.dismiss();
                     }
                 }
             });
 
-            authDialog.show();
-            authDialog.setTitle("title");
-            authDialog.setCancelable(true);
+            m_authDialog.show();
+            m_authDialog.setTitle(R.string.txt_login);
+            m_authDialog.setCancelable(true);
         }
     }
+
+    class FakeLoginButtonListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            ProfileManager.GetInstance().InitFakeProfile();
+        }
+    }
+
 }

@@ -1,48 +1,74 @@
 package com.yevgeniyzamkovenko.taro.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
 
+import com.yevgeniyzamkovenko.taro.Profile;
 import com.yevgeniyzamkovenko.taro.R;
+import com.yevgeniyzamkovenko.taro.listener.OnTokenChangeListener;
+import com.yevgeniyzamkovenko.taro.manager.ProfileManager;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnTokenChangeListener {
 
+    private DrawerLayout m_drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Start();
+        ProfileManager.GetInstance().AddListener(this);
+
         ConfigMenu();
     }
 
     private void ConfigMenu() {
+        boolean isAuthorized = ProfileManager.GetInstance().IsAuthorized();
+        m_drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        m_drawerLayout.setDrawerLockMode(isAuthorized ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
+        if (isAuthorized) {
+            LoadMainScreen();
+        } else {
+            LeadLoginScreen();
+        }
     }
 
-    private void Start() {
-        // Create a new Fragment to be placed in the activity layout
-//        Fragment firstFragment = new MainScreenFragment();
-        Fragment firstFragment = new LoginFragment();
+    private void LeadLoginScreen() {
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_container, new LoginFragment())
+                .commit();
+    }
 
-        // In case this activity was started with special instructions from an
-        // Intent, pass the Intent's extras to the fragment as arguments
-        firstFragment.setArguments(getIntent().getExtras());
-
-        // Add the fragment to the 'fragment_container' FrameLayout
-        getFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, firstFragment).commit();
-
+    private void LoadMainScreen() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new MainScreenFragment())
+                .commit();
     }
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0 ){
+        if (HasBackStack()) {
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    private boolean HasBackStack() {
+        return getFragmentManager().getBackStackEntryCount() > 0;
+    }
+
+    @Override
+    public void OnTokenChange(Profile profile) {
+        boolean activated = profile != null;
+        m_drawerLayout.setDrawerLockMode(activated ? DrawerLayout.LOCK_MODE_UNLOCKED :DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        if (activated) {
+            LoadMainScreen();
         }
     }
 }

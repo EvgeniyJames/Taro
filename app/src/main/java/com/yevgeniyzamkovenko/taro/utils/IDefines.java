@@ -5,6 +5,9 @@ package com.yevgeniyzamkovenko.taro.utils;
  * Date: 14.10.2015
  */
 public interface IDefines {
+
+    boolean DEBUG_MODE = true;
+
     boolean JAVASCRIPT_ENABLE = true;
 
     String CLIENT_ID = "1";

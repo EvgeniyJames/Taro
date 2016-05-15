@@ -9,4 +9,6 @@
     <string name="txt_card_type_three_cards">Three Cards</string>
     <string name="txt_card_type_celt">Celt\'s Cross</string>
     <string name="txt_card_type_being_wheel">Being Wheel</string>
+    <string name="txt_no_internet">No Internet connection</string>
+    <string name="txt_fake">FAKE</string>
 </resources>

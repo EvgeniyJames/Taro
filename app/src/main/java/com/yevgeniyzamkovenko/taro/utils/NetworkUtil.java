@@ -30,7 +30,9 @@ public class NetworkUtil {
 
             if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
                 return TYPE_MOBILE;
+
         }
+
         return TYPE_NOT_CONNECTED;
     }
 

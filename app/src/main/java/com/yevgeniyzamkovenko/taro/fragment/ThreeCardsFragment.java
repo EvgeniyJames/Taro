@@ -22,16 +22,6 @@ public class ThreeCardsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_three_cards, container, false);
-
-        Button btnBack = (Button) view.findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                getFragmentManager().popBackStack();
-            }
-        });
-
         return view;
     }
 

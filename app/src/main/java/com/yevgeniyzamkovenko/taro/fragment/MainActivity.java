@@ -1,5 +1,6 @@
 package com.yevgeniyzamkovenko.taro.fragment;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +22,8 @@ public class MainActivity extends FragmentActivity implements OnTokenChangeListe
         ProfileManager.GetInstance().AddListener(this);
 
         ConfigMenu();
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     private void ConfigMenu() {

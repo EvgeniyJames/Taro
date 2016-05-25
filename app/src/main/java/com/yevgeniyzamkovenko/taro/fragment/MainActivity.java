@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import com.yevgeniyzamkovenko.taro.Profile;
 import com.yevgeniyzamkovenko.taro.R;
 import com.yevgeniyzamkovenko.taro.listener.OnTokenChangeListener;
+import com.yevgeniyzamkovenko.taro.manager.DatabaseManager;
 import com.yevgeniyzamkovenko.taro.manager.ProfileManager;
 
 public class MainActivity extends FragmentActivity implements OnTokenChangeListener {
@@ -18,6 +19,8 @@ public class MainActivity extends FragmentActivity implements OnTokenChangeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DatabaseManager.Init();
 
         ProfileManager.GetInstance().AddListener(this);
 

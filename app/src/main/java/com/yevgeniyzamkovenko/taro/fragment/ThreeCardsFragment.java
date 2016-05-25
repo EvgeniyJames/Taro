@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.yevgeniyzamkovenko.taro.R;
-import com.yevgeniyzamkovenko.taro.utils.MiscUtils;
 
 
 /**
@@ -39,7 +38,7 @@ public class ThreeCardsFragment extends Fragment {
                 childAt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MiscUtils.DEBUG(v.hashCode() + " ");
+//                        v.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.card_flip_left_in));
                     }
                 });
             }

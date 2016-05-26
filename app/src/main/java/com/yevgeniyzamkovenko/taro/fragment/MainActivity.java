@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import com.yevgeniyzamkovenko.taro.Profile;
 import com.yevgeniyzamkovenko.taro.R;
 import com.yevgeniyzamkovenko.taro.listener.OnTokenChangeListener;
+import com.yevgeniyzamkovenko.taro.manager.CardManager;
 import com.yevgeniyzamkovenko.taro.manager.ProfileManager;
 
 public class MainActivity extends FragmentActivity implements OnTokenChangeListener {
@@ -20,6 +21,7 @@ public class MainActivity extends FragmentActivity implements OnTokenChangeListe
         setContentView(R.layout.activity_main);
 
         ProfileManager.GetInstance().AddListener(this);
+        CardManager.GetInstance().Init(this);
 
         ConfigMenu();
 
@@ -34,11 +36,11 @@ public class MainActivity extends FragmentActivity implements OnTokenChangeListe
         if (isAuthorized) {
             LoadMainScreen();
         } else {
-            LeadLoginScreen();
+            LoadLoginScreen();
         }
     }
 
-    private void LeadLoginScreen() {
+    private void LoadLoginScreen() {
         getFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container, new LoginFragment())
@@ -68,7 +70,7 @@ public class MainActivity extends FragmentActivity implements OnTokenChangeListe
     @Override
     public void OnTokenChange(Profile profile) {
         boolean activated = profile != null;
-        m_drawerLayout.setDrawerLockMode(activated ? DrawerLayout.LOCK_MODE_UNLOCKED :DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        m_drawerLayout.setDrawerLockMode(activated ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         if (activated) {
             LoadMainScreen();

@@ -10,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.yevgeniyzamkovenko.taro.R;
+import com.yevgeniyzamkovenko.taro.actor.Card;
+import com.yevgeniyzamkovenko.taro.animation.FlipAnimation;
+import com.yevgeniyzamkovenko.taro.manager.CardManager;
+
+import java.util.ArrayList;
 
 
 /**
@@ -24,25 +29,23 @@ public class ThreeCardsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_three_cards, container, false);
 
+        CardManager.GetInstance().InitCards();
+
         ConfigImages(view);
 
         return view;
     }
 
-    private void ConfigImages(View view) {
+    private void ConfigImages(final View view) {
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.innercontainer);
         int size = linearLayout.getChildCount();
         for (int i = 0; i < size; i++) {
-            View childAt = linearLayout.getChildAt(i);
+            final View childAt = linearLayout.getChildAt(i);
             if (childAt instanceof ImageView) {
-                childAt.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        v.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.card_flip_left_in));
-                    }
-                });
+                Card freeCard = CardManager.GetInstance().GetFreeCard();
+                freeCard.setContext(getActivity());
+                childAt.setOnClickListener(freeCard);
             }
         }
     }
-
 }

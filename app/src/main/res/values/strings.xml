@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Taro</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">@string/app_name</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -11,4 +11,19 @@
     <string name="txt_card_type_being_wheel">Being Wheel</string>
     <string name="txt_no_internet">No Internet connection</string>
     <string name="txt_fake">FAKE</string>
+
+
+    <!--DESCRIPTIONS-->
+
+    <string name="card_fool_desc">На карте изображён человек в одежде шута, держащий в руке розу. На плечо у него закинута палка с которой свисает мешок, вышитый колдовскими символами. Он, глядя в небо, шагает к невидимому обрыву, от чего его безуспешно пытается удержать собачонка.	</string>
+    <string name="card_bonifacio_desc">Жрица сидит на троне между двух колонн (чёрной и белой), на которых могут быть проставлены еврейские буквы Йод и Бейт, обозначающие Солнце и Луну (ими Соломон украсил колонны в Храме). На жрице надета папская тиара, в руках — свиток. Также изображены лунный серп, разрезанные плоды граната, внизу течёт вода.</string>
+    <string name="card_magician_desc">На карте изображён маг в просторном платье с поднятой
+        рукой, держащей магический жезл. Над его головой символ бесконечности, две змеи, кусающие друг друга за хвост, образуют его пояс. У его ног цветут растения, а перед ним лежат четыре предмета (олицетворение мастей младших арканов): жезл, кубок, меч и динарий.</string>
+
+
+    <!--NAMES-->
+
+    <string name="txt_magician_name">Маг</string>
+    <string name="txt_bonifacio_name">Верховная Жрица</string>
+    <string name="txt_fool_name">Шут</string>
 </resources>

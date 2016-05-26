@@ -29,12 +29,11 @@ public class MainScreenFragment extends Fragment {
         btnThreeCards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.fragment_container, m_threeCard);
-
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, m_threeCard)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 

@@ -20,6 +20,7 @@ public interface IDefines {
     String URL_API = URL_MAIN + "/api";
 
     String URL_GET_TOKEN = URL_API + "/user/token";
+    String URL_GET_LOGIN = URL_API + "/user/login";
 
     String EXTRA_CODE = "code";
 }

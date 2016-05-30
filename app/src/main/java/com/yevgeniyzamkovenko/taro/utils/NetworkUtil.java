@@ -4,6 +4,17 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * User: EvgeniyJames
  * Date: 13.05.2016
@@ -47,5 +58,69 @@ public class NetworkUtil {
             status = "Not connected to Internet";
         }
         return status;
+    }
+
+    public static String PerformPostCall(String requestURL,
+                                  HashMap<String, String> postDataParams) {
+
+        URL url;
+        String response = "";
+        try {
+            url = new URL(requestURL);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            String charset = "UTF-8";
+
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Accept-Charset", charset);
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=" + charset);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+
+            OutputStream writer = conn.getOutputStream();
+
+            String postDataString = getPostDataString(postDataParams);
+
+            writer.write(postDataString.getBytes(charset));
+
+            writer.flush();
+            writer.close();
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                String line;
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
+                    response += line;
+                }
+            } else {
+                response = "";
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    private static String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            if (first){
+                first = false;
+            }
+            else
+            {
+                result.append("&");
+            }
+
+            result.append(entry.getKey());
+            result.append("=");
+            result.append(entry.getValue());
+        }
+
+        return result.toString();
     }
 }

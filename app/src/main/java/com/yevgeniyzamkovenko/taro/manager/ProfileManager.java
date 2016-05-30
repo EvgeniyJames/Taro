@@ -2,6 +2,7 @@ package com.yevgeniyzamkovenko.taro.manager;
 
 import com.yevgeniyzamkovenko.taro.Profile;
 import com.yevgeniyzamkovenko.taro.listener.OnTokenChangeListener;
+import com.yevgeniyzamkovenko.taro.task.GetLoginTask;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class ProfileManager {
 
     public void SetProfile(Profile profile) {
         m_profile = profile;
-        UpdateListeners();
+        NotifyListeners();
     }
 
     private static void CreateInstance() {
@@ -54,10 +55,10 @@ public class ProfileManager {
     }
 
     private void UpdateUserInfo() {
-
+        new GetLoginTask().execute();
     }
 
-    public void UpdateListeners() {
+    public void NotifyListeners() {
         int size = m_onTokenChangeListeners.size();
         for (int i = 0; i < size; i++) {
             m_onTokenChangeListeners.get(i).OnTokenChange(m_profile);

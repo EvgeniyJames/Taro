@@ -11,10 +11,7 @@ import android.widget.LinearLayout;
 
 import com.yevgeniyzamkovenko.taro.R;
 import com.yevgeniyzamkovenko.taro.actor.Card;
-import com.yevgeniyzamkovenko.taro.animation.FlipAnimation;
 import com.yevgeniyzamkovenko.taro.manager.CardManager;
-
-import java.util.ArrayList;
 
 
 /**

@@ -4,11 +4,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.yevgeniyzamkovenko.taro.Profile;
 import com.yevgeniyzamkovenko.taro.R;
@@ -90,7 +87,7 @@ public class MainActivity extends FragmentActivity implements OnTokenChangeListe
 
             m_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, m_items);
 
-//            listView.setAdapter(m_adapter);
+            listView.setAdapter(m_adapter);
         }
 
         if (activated) {

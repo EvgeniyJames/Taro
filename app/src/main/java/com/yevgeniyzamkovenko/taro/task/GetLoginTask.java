@@ -14,6 +14,9 @@ import java.util.HashMap;
  * Date: 30.05.2016
  */
 public class GetLoginTask extends AsyncTask<Void, Void, Void> {
+
+    private String m_login;
+
     @Override
     protected Void doInBackground(Void... params) {
         GetLoginInstance();
@@ -25,10 +28,15 @@ public class GetLoginTask extends AsyncTask<Void, Void, Void> {
 
         params.put("token", ProfileManager.GetInstance().GetToken());
 
-        String result = NetworkUtil.PerformPostCall(IDefines.URL_GET_LOGIN, params);
+        m_login = NetworkUtil.PerformPostCall(IDefines.URL_GET_LOGIN, params);
+       m_login =  m_login.substring(1, m_login.length() - 2);
+    }
 
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
         Profile profile = new Profile();
-        profile.SetName(result);
+        profile.SetName(m_login);
         ProfileManager.GetInstance().SetProfile(profile);
     }
 }

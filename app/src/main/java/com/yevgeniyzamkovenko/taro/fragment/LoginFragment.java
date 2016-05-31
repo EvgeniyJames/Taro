@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 
 import com.yevgeniyzamkovenko.taro.R;
 import com.yevgeniyzamkovenko.taro.manager.ProfileManager;
-import com.yevgeniyzamkovenko.taro.task.GetTokenTask;
 import com.yevgeniyzamkovenko.taro.utils.IDefines;
 import com.yevgeniyzamkovenko.taro.utils.MiscUtils;
 import com.yevgeniyzamkovenko.taro.utils.NetworkUtil;
@@ -89,13 +87,9 @@ public class LoginFragment extends Fragment{
 
                         ProfileManager.GetInstance().SetToken(token);
 
-                        new GetTokenTask().execute();
-
                         context.setResult(Activity.RESULT_OK, m_resultIntent);
 
                         MiscUtils.DEBUG(getClass().getSimpleName(), "dismiss auth dialog");
-
-//                        Toast.makeText(context, getString(R.string.txtLoggedIn), Toast.LENGTH_SHORT).show();
 
                         m_authDialog.dismiss();
                     }

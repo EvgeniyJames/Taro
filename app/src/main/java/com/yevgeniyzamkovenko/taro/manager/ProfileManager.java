@@ -72,10 +72,6 @@ public class ProfileManager {
         }
     }
 
-    public String GetCode() {
-        return m_code;
-    }
-
     public void InitFakeProfile() {
         Profile profile = new Profile();
         profile.SetName("FakeName");

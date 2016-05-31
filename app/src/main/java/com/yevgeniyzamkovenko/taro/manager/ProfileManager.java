@@ -3,6 +3,7 @@ package com.yevgeniyzamkovenko.taro.manager;
 import com.yevgeniyzamkovenko.taro.Profile;
 import com.yevgeniyzamkovenko.taro.listener.OnTokenChangeListener;
 import com.yevgeniyzamkovenko.taro.task.GetLoginTask;
+import com.yevgeniyzamkovenko.taro.utils.MiscUtils;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,9 @@ public class ProfileManager {
 
     public void SetProfile(Profile profile) {
         m_profile = profile;
+
+        MiscUtils.DEBUG("SetName: " + profile.GetName());
+
         NotifyListeners();
     }
 
@@ -51,6 +55,9 @@ public class ProfileManager {
 
     public void SetToken(String token) {
         m_token = token;
+
+        MiscUtils.DEBUG("SetToken: " + token);
+
         UpdateUserInfo();
     }
 
@@ -67,10 +74,6 @@ public class ProfileManager {
 
     public String GetCode() {
         return m_code;
-    }
-
-    public void SetCode(String code) {
-        m_code = code;
     }
 
     public void InitFakeProfile() {

@@ -63,6 +63,8 @@ public class NetworkUtil {
     public static String PerformPostCall(String requestURL,
                                   HashMap<String, String> postDataParams) {
 
+        MiscUtils.DEBUG("PerformPostCall");
+
         URL url;
         String response = "";
         try {
@@ -87,6 +89,8 @@ public class NetworkUtil {
             writer.close();
             int responseCode = conn.getResponseCode();
 
+            MiscUtils.DEBUG("Response Conde: " + responseCode);
+
             if (responseCode == HttpsURLConnection.HTTP_OK) {
                 String line;
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -95,7 +99,6 @@ public class NetworkUtil {
                 }
             } else {
                 response = "";
-
             }
         } catch (Exception e) {
             e.printStackTrace();

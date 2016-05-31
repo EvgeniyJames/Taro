@@ -38,9 +38,9 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
     public void GetTokenInstance() {
         HashMap<String, String> params = new HashMap<>();
 
-        params.put("code", JSONObject.quote(ProfileManager.GetInstance().GetCode()));
-        params.put("client_id", IDefines.CLIENT_ID);
-        params.put("client_secret", IDefines.CLIENT_SECRET);
+        params.put("clientId", IDefines.CLIENT_ID);
+        params.put("redirectUrl", IDefines.URL_REDIRECT);
+        params.put("responceType", "token");
 
         MiscUtils.DEBUG(getClass().getSimpleName(), "Params: " + params);
 
@@ -50,6 +50,5 @@ public class GetTokenTask extends AsyncTask<Void, Void, Void> {
         ProfileManager.GetInstance().SetToken(result);
 
         MiscUtils.DEBUG(getClass().getSimpleName(), "HttpPost execute");
-
     }
 }

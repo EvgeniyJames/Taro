@@ -90,7 +90,7 @@ public class MainActivity extends FragmentActivity implements OnTokenChangeListe
 
             m_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, m_items);
 
-            listView.setAdapter(m_adapter);
+//            listView.setAdapter(m_adapter);
         }
 
         if (activated) {

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -69,7 +70,7 @@ public class LoginFragment extends Fragment{
 
                 Intent m_resultIntent = new Intent();
                 boolean m_isAuthComplete = false;
-                String m_authCode;
+                String token;
 
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -78,15 +79,15 @@ public class LoginFragment extends Fragment{
                     MiscUtils.DEBUG(getClass().getSimpleName(), "Page started");
                     MiscUtils.DEBUG(getClass().getSimpleName(), "URL: " + url);
 
-                    if(url.contains("?code=") && !m_isAuthComplete) {
+                    if(url.contains("?token=") && !m_isAuthComplete) {
 
                         Uri uri = Uri.parse(url);
-                        m_authCode = uri.getQueryParameter("code");
-                        MiscUtils.DEBUG(getClass().getSimpleName(), "Code: " + m_authCode);
+                        token = uri.getQueryParameter("token");
+                        MiscUtils.DEBUG(getClass().getSimpleName(), "token: " + token);
 
                         m_isAuthComplete = true;
 
-                        ProfileManager.GetInstance().SetCode(m_authCode);
+                        ProfileManager.GetInstance().SetToken(token);
 
                         new GetTokenTask().execute();
 

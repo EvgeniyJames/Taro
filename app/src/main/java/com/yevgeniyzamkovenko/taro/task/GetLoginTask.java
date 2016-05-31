@@ -29,7 +29,7 @@ public class GetLoginTask extends AsyncTask<Void, Void, Void> {
         params.put("token", ProfileManager.GetInstance().GetToken());
 
         m_login = NetworkUtil.PerformPostCall(IDefines.URL_GET_LOGIN, params);
-       m_login =  m_login.substring(1, m_login.length() - 2);
+       m_login =  m_login.substring(1, m_login.length() - 1);
     }
 
     @Override
